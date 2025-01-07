@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Answer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/process.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>AI File Query System</h1>
+            <p>Your file has been processed, and here’s the answer to your question:</p>
+        </header>
+        <main>
+            <div class="response">
+                <h2>Question:</h2>
+                <p class="question">{{ question }}</p>
+
+                <h2>Answer:</h2>
+                <p class="answer">{{ answer }}</p>
+            </div>
+
+            <a href="/" class="button">Ask Another Question</a>
+        </main>
+        
+    </div>
+</body>
+</html>
