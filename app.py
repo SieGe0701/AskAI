@@ -37,7 +37,7 @@ def process_file():
                 file_content += page.extract_text()
                 
         elif mime_type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':  # If the file is an Excel file
-            workbook = openpyxl.load_workbook(BytesIO(file.read()))
+            workbook = openpyxl.load_workbook(BytesIO(file.read()),read_only=True)
             for sheet in workbook.worksheets:
                 for row in sheet.iter_rows(values_only=True):
                     file_content += "\t".join([str(cell) if cell is not None else "" for cell in row]) + "\n"
