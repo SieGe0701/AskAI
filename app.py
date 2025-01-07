@@ -36,7 +36,7 @@ def process_file():
             for page in reader.pages:
                 file_content += page.extract_text()
                 
-        elif mime_type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':  # If the file is an Excel file
+        elif mime_type == 'application/vnd.ms-excel':  # If the file is an Excel file
             workbook = openpyxl.load_workbook(BytesIO(file.read()),read_only=True)
             for sheet in workbook.worksheets:
                 for row in sheet.iter_rows(values_only=True):
