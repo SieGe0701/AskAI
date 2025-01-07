@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 from PyPDF2 import PdfReader  # Import for reading PDF files
 from io import BytesIO
 import mimetypes
+import openpyxl
 
 load_dotenv()
 api_key = os.getenv('api_key')
@@ -34,6 +35,12 @@ def process_file():
             reader = PdfReader(BytesIO(file.read()))
             for page in reader.pages:
                 file_content += page.extract_text()
+                
+        elif mime_type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':  # If the file is an Excel file
+            workbook = openpyxl.load_workbook(BytesIO(file.read()))
+            for sheet in workbook.worksheets:
+                for row in sheet.iter_rows(values_only=True):
+                    file_content += "\t".join([str(cell) if cell is not None else "" for cell in row]) + "\n"
         else:  # If the file is a text file
             file_content = file.read().decode('utf-8')
     except Exception as e:
